@@ -1,6 +1,7 @@
 package com.bridgelabz.addressbook;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class ContactPerson {
@@ -10,6 +11,7 @@ public class ContactPerson {
 		 
 		new_list = addPerson();
 		editContact();
+		deleteContact();
 	}
 	
 	public static ArrayList addPerson() {
@@ -86,8 +88,24 @@ public class ContactPerson {
 			System.out.println(p.getFirst_name()+" "+ p.getLast_name()+" " + p.getAddress()+" "+ p.getCity()+" "+ p.getState()+" "+ p.getZip()+" "+ p.getPhone()+ " " +p.getEmail());
 
 		}
-		
-				
+	}
+	
+	public static void deleteContact() {
+		Scanner sc = new Scanner(System.in);
+		Iterator<AddressBook> itr = new_list.iterator();
+		System.out.println("Enter name of the person to be deleted");
+		String del_person = sc.nextLine();
+		while(itr.hasNext()) {
+			AddressBook book= itr.next();
+			if(book.getFirst_name().equalsIgnoreCase(del_person)) {
+				itr.remove();
+			}
+		}
+		System.out.println("The details after deleting are :");
+		for(AddressBook p : new_list) {
+			System.out.println(p.getFirst_name()+" "+ p.getLast_name()+" " + p.getAddress()+" "+ p.getCity()+" "+ p.getState()+" "+ p.getZip()+" "+ p.getPhone()+ " " +p.getEmail());
+
+		}
 	}
 }
 
