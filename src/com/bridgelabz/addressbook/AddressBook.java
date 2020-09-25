@@ -7,8 +7,19 @@ public class AddressBook {
 	private String city;
 	private String state;
 	private int zip;
-	private int phone;
+	private long phone;
 	private String email;
+	
+	public AddressBook(String first_name, String last_name, String address, String city, String state, int zip, long phone, String email) {
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		this.phone =phone;
+		this.email = email;
+	}
 	
 	public String getFirst_name() {
 		return first_name;
@@ -58,11 +69,11 @@ public class AddressBook {
 		this.zip = zip;
 	}
 
-	public int getPhone() {
+	public long getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(long phone) {
 		this.phone = phone;
 	}
 
@@ -72,9 +83,5 @@ public class AddressBook {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public static void main(String[] args) {
-		System.out.println("Welcome to Address Book Program");
 	}
 }
