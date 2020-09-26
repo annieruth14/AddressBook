@@ -8,10 +8,16 @@ public class ContactPerson {
 
 	private static ArrayList<AddressBook> new_list = new ArrayList<AddressBook>();
 	public static void main(String[] args) {
-		 
+		Scanner sc = new Scanner(System.in); 
 		new_list = addPerson();
-		editContact();
-		deleteContact();
+		System.out.println("Do you want to edit any details of any person?");
+		String ans_edit = sc.nextLine();
+		if(ans_edit.equalsIgnoreCase("yes"))
+			editContact();
+		System.out.println("Do you want to delete a person?");
+		String ans_del = sc.nextLine();
+		if(ans_del.equalsIgnoreCase("yes"))
+			deleteContact();
 	}
 	
 	public static ArrayList addPerson() {
@@ -40,8 +46,13 @@ public class ContactPerson {
 			
 			AddressBook book = new AddressBook(f_name,l_name,address,city,state,zip,ph,email);
 			list.add(book);
-			System.out.println("Do you want to enter more person? Enter yes or no: ");
+			System.out.println("Do you want to enter more person? yes or no: ");
 			answer = sc.nextLine();
+		}
+		System.out.println("The details after adding are :");
+		for(AddressBook p : list) {
+			System.out.println(p.getFirst_name()+" "+ p.getLast_name()+" " + p.getAddress()+" "+ p.getCity()+" "+ p.getState()+" "+ p.getZip()+" "+ p.getPhone()+ " " +p.getEmail());
+
 		}
 		return list;
 		
@@ -50,7 +61,6 @@ public class ContactPerson {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the name to edit");
 		String name = sc.nextLine();
-		String search = "null";
 		
 		System.out.println("Enter the field you want to edit");
 		String field = sc.nextLine();
