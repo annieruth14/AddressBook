@@ -36,6 +36,7 @@ public class ContactPerson {
 	public void searchPersonByState() {
 		System.out.println("Enter the name of the State");
 		String state = sc.nextLine();
+		int count = 0;
 		HashMap<String, String> stateMap = new HashMap<>();
 		
 		for(AddressBook b : list) {
@@ -45,14 +46,17 @@ public class ContactPerson {
 		}
 		System.out.println("The persons present in "+state+ " are :");
 		for(Map.Entry entry : stateMap.entrySet()) {
+			count++;
 			System.out.println(entry.getKey() + " : " + entry.getValue());
 		}
+		System.out.println("Count : " + count);
 		
 	}
 
 	public void searchPersonByCity() {
 		System.out.println("Enter the name of the city");
 		String city = sc.nextLine();
+		int count =0;
 		HashMap<String, String> cityMap = new HashMap<>();
 		
 		for(AddressBook b : list) {
@@ -62,8 +66,10 @@ public class ContactPerson {
 		}
 		System.out.println("The persons present in "+city+ " are :");
 		for(Map.Entry m : cityMap.entrySet()) {
+			count ++;
 			System.out.println(m.getKey() + " : " + m.getValue());
 		}
+		System.out.println("Count : " + count);
 	}
 
 	public void addPerson() { 
