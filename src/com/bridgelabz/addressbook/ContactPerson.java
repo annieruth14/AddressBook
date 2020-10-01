@@ -1,7 +1,9 @@
 package com.bridgelabz.addressbook;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 
 public class ContactPerson {
@@ -20,25 +22,47 @@ public class ContactPerson {
 		String ans_del = sc.nextLine();
 		if(ans_del.equalsIgnoreCase("yes"))
 			obj.deleteContact();
-		System.out.println("Do you want to search a person given city? (yes/no)");
+		System.out.println("Do you want to search a person by city? (yes/no)");
 		String ans_city = sc.nextLine();
 		if(ans_city.equals("yes"))
-			obj.searchPerson();
+			obj.searchPersonByCity();
+		System.out.println("Do you want to search a person by State? (yes/no)");
+		String ans_state = sc.nextLine();
+		if(ans_state.equals("yes"))
+			obj.searchPersonByState();
 		
 	}
 	
-	public void searchPerson() {
+	public void searchPersonByState() {
+		System.out.println("Enter the name of the State");
+		String state = sc.nextLine();
+		HashMap<String, String> stateMap = new HashMap<>();
+		
+		for(AddressBook b : list) {
+			if(b.getState().equals(state)) {
+				stateMap.put( b.getFirst_name() , state);
+			}
+		}
+		System.out.println("The persons present in "+state+ " are :");
+		for(Map.Entry entry : stateMap.entrySet()) {
+			System.out.println(entry.getKey() + " : " + entry.getValue());
+		}
+		
+	}
+
+	public void searchPersonByCity() {
 		System.out.println("Enter the name of the city");
-		ArrayList<String> cityList = new ArrayList<>();
 		String city = sc.nextLine();
+		HashMap<String, String> cityMap = new HashMap<>();
+		
 		for(AddressBook b : list) {
 			if(b.getCity().equals(city)) {
-				cityList.add(b.getFirst_name());
+				cityMap.put(b.getFirst_name() , city);
 			}
 		}
 		System.out.println("The persons present in "+city+ " are :");
-		for(String s : cityList) {
-			System.out.println(s);
+		for(Map.Entry m : cityMap.entrySet()) {
+			System.out.println(m.getKey() + " : " + m.getValue());
 		}
 	}
 
