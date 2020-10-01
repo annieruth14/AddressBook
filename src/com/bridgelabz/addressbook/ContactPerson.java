@@ -5,11 +5,12 @@ import java.util.Iterator;
 
 
 public class ContactPerson {
-	static ContactPerson obj = new ContactPerson();
-	private static ArrayList<AddressBook> list = new ArrayList<AddressBook>();
+	public static ContactPerson obj = new ContactPerson();
+	public static ArrayList<AddressBook> list = new ArrayList<AddressBook>();
+	public static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in); 
+		 
 		obj.addPerson();
 		System.out.println("Do you want to edit any details of any person? (yes/no)");
 		String ans_edit = sc.nextLine();
@@ -19,10 +20,30 @@ public class ContactPerson {
 		String ans_del = sc.nextLine();
 		if(ans_del.equalsIgnoreCase("yes"))
 			obj.deleteContact();
+		System.out.println("Do you want to search a person given city? (yes/no)");
+		String ans_city = sc.nextLine();
+		if(ans_city.equals("yes"))
+			obj.searchPerson();
+		
 	}
 	
+	public void searchPerson() {
+		System.out.println("Enter the name of the city");
+		ArrayList<String> cityList = new ArrayList<>();
+		String city = sc.nextLine();
+		for(AddressBook b : list) {
+			if(b.getCity().equals(city)) {
+				cityList.add(b.getFirst_name());
+			}
+		}
+		System.out.println("The persons present in "+city+ " are :");
+		for(String s : cityList) {
+			System.out.println(s);
+		}
+	}
+
 	public void addPerson() { 
-		Scanner sc = new Scanner(System.in);
+		
 		String answer = "null"; 
 		while(!(answer.equals("no"))) {
 			
@@ -62,7 +83,7 @@ public class ContactPerson {
 	}
 
 	public void editContact() {
-		Scanner sc = new Scanner(System.in);
+		
 		System.out.println("Enter the name to edit");
 		String name = sc.nextLine();
 		
@@ -105,7 +126,7 @@ public class ContactPerson {
 	}
 	
 	public void deleteContact() {
-		Scanner sc = new Scanner(System.in);
+		
 		Iterator<AddressBook> itr = list.iterator();
 		System.out.println("Enter name of the person to be deleted");
 		String del_person = sc.nextLine();
