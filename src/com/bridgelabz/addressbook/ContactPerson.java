@@ -5,23 +5,23 @@ import java.util.Iterator;
 
 
 public class ContactPerson {
-
-	private static ArrayList<AddressBook> new_list = new ArrayList<AddressBook>();
+	static ContactPerson obj = new ContactPerson();
+	private static ArrayList<AddressBook> list = new ArrayList<AddressBook>();
+	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in); 
-		new_list = addPerson();
-		System.out.println("Do you want to edit any details of any person?");
+		obj.addPerson();
+		System.out.println("Do you want to edit any details of any person? (yes/no)");
 		String ans_edit = sc.nextLine();
 		if(ans_edit.equalsIgnoreCase("yes"))
-			editContact();
-		System.out.println("Do you want to delete a person?");
+			obj.editContact();
+		System.out.println("Do you want to delete a person? (yes/no)");
 		String ans_del = sc.nextLine();
 		if(ans_del.equalsIgnoreCase("yes"))
-			deleteContact();
+			obj.deleteContact();
 	}
 	
-	public static ArrayList addPerson() {
-		ArrayList<AddressBook> list = new ArrayList<AddressBook>(); 
+	public void addPerson() { 
 		Scanner sc = new Scanner(System.in);
 		String answer = "null"; 
 		while(!(answer.equals("no"))) {
@@ -45,8 +45,12 @@ public class ContactPerson {
 			String email = sc.nextLine();
 			
 			AddressBook book = new AddressBook(f_name,l_name,address,city,state,zip,ph,email);
-			list.add(book);
-			System.out.println("Do you want to enter more person? yes or no: ");
+			if(list.contains(book)) {
+				System.out.println("Name already exists. Hence cannot be added   " );
+			}
+			else
+				list.add(book);
+			System.out.println("Do you want to enter more person? (yes/no)  ");
 			answer = sc.nextLine();
 		}
 		System.out.println("The details after adding are :");
@@ -54,19 +58,19 @@ public class ContactPerson {
 			System.out.println(p.getFirst_name()+" "+ p.getLast_name()+" " + p.getAddress()+" "+ p.getCity()+" "+ p.getState()+" "+ p.getZip()+" "+ p.getPhone()+ " " +p.getEmail());
 
 		}
-		return list;
 		
 	}
-	public  static void editContact() {
+
+	public void editContact() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the name to edit");
 		String name = sc.nextLine();
 		
-		System.out.println("Enter the field you want to edit");
+		System.out.println("Enter the field you want to edit : (address/city/state/zip/phone/email)");
 		String field = sc.nextLine();
 		System.out.println("Enter the new value");
 		String new_value = sc.nextLine();
-		for(AddressBook b : new_list) {
+		for(AddressBook b : list) {
 			if(name.equalsIgnoreCase(b.getFirst_name())) {
 				if(field.equalsIgnoreCase("address")) {
 					b.setAddress(new_value);
@@ -94,15 +98,15 @@ public class ContactPerson {
 			
 		}
 		System.out.println("The details after editing are :");
-		for(AddressBook p : new_list) {
+		for(AddressBook p : list) {
 			System.out.println(p.getFirst_name()+" "+ p.getLast_name()+" " + p.getAddress()+" "+ p.getCity()+" "+ p.getState()+" "+ p.getZip()+" "+ p.getPhone()+ " " +p.getEmail());
 
 		}
 	}
 	
-	public static void deleteContact() {
+	public void deleteContact() {
 		Scanner sc = new Scanner(System.in);
-		Iterator<AddressBook> itr = new_list.iterator();
+		Iterator<AddressBook> itr = list.iterator();
 		System.out.println("Enter name of the person to be deleted");
 		String del_person = sc.nextLine();
 		while(itr.hasNext()) {
@@ -112,30 +116,11 @@ public class ContactPerson {
 			}
 		}
 		System.out.println("The details after deleting are :");
-		for(AddressBook p : new_list) {
+		for(AddressBook p : list) {
 			System.out.println(p.getFirst_name()+" "+ p.getLast_name()+" " + p.getAddress()+" "+ p.getCity()+" "+ p.getState()+" "+ p.getZip()+" "+ p.getPhone()+ " " +p.getEmail());
 
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
